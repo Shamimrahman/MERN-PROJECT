@@ -1,0 +1,6 @@
+Create Nodejs Server with Hello World 
+Create Mongodb atlas 
+connect mongodb atlas db in app.js using const
+We get const DB="Key from Connect of Mongo db Atlast" 
+Access IP Address from anywhere in Mongo Atlas
+Connection end
