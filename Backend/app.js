@@ -13,7 +13,13 @@ dotenv.config({path:'./config.env'})
 require('./db/connection')
 //connection of db end
 
+//to get json data from postamn
+app.use(express.json())
 
+//get router
+const router=require('./router/routers')
+app.use(router)
+//get router end
 
 
 

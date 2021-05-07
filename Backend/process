@@ -9,3 +9,15 @@ create config.env file
 Put DB in config.env 
 Then require env file in App.js
 Create Model folder and UserSCHEMA
+
+Create Router
+#App.js a jei rouuter gula ase ta routers.js a anbo 
+#router define korte hobe 
+#const router=new express.Router()
+#app.js a ai router require kore use korte hobe tar age export korte hobe
+#Then router form korte hobe
+#Postman operation chalaite hobe post get check korte hobe
+#Schema k require korte hobe routers.js a 
+#json file read korar jonno app.js a use korte hobe
+#post user 
+#get user
