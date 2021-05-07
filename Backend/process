@@ -8,3 +8,4 @@ Secure code with dotenv
 create config.env file 
 Put DB in config.env 
 Then require env file in App.js
+Create Model folder and UserSCHEMA
