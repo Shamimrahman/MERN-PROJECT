@@ -10,7 +10,7 @@ const User =require('../model/userSchema')
 
 //routing
 router.get("/",(req,res)=>{
-    res.send("Hello from Students Database")
+    res.send("Hello from USER Database")
 })
 
 //using async await
@@ -62,7 +62,34 @@ router.get('/getUser/:id', async (req,res)=>{
  
  //get imdividual student finish
  
+//Login start
+router.post('/login',async(req,res)=>{
+    try{
+        const email=req.body.email;
+        const password=req.body.password
 
+        const usermail=await User.findOne({email:email})
+          //ekhn amra reg a jei password disi ta to hash hoye db a ase
+         //so amra jokhon login korte jabo tokhon to password text akar a jabe
+         //so bcrypt kore nite jate db er password and login er pass word match hoy
+         //match na hole login hobe na
+        
+        
+        if(ismatch){
+            res.status(201).render("/")
+            
+        }
+
+        else{
+            res.send("Please Use Proper Information")
+        }
+
+    }
+
+    catch(e){
+        res.status(400).send("Invalid mail")
+    }
+})
 
 module.exports=router
 
