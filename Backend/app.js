@@ -1,3 +1,4 @@
+const dotenv=require('dotenv')
 const express=require("express")
 const app=express()
 const mongoose=require("mongoose")
@@ -5,7 +6,8 @@ const path=require('path')
 const port=process.env.PORT || 3000
 
 // connect db of mongodb atlast
-const DB='mongodb+srv://shamim:12345@cluster0.arxxp.mongodb.net/Mernstack?retryWrites=true&w=majority'
+dotenv.config({path:'./config.env'})
+const DB=process.env.DATABASE
 mongoose.connect(DB,{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex:true,useFindAndModify:false})
 .then(()=>
 
