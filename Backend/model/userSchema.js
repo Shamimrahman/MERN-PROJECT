@@ -74,6 +74,23 @@ const UserSchema= new mongoose.Schema({
     
 })
 
+//password hash
+const bcrypt=require('bcryptjs')
+UserSchema.pre("save",async function(next){
+    if(this.isModified('password')){
+        console.log(`Password before hashing ${this.password}`)
+        this.password=await bcrypt.hash(this.password,10)
+        console.log(`Password after hashing ${this.password}`)
+
+        this.confirmpass=await bcrypt.hash(this.password,10)
+        //database a tahole r confirm password dekhabe na
+
+    }
+    next()
+})
+
+//password hash end
+
 //create collection Start
 
 const User=new mongoose.model("USER",UserSchema)

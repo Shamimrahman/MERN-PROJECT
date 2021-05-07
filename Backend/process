@@ -23,6 +23,8 @@ Create Router
 #get user
 
 Login Functionality in router.js 
+
 Password hashing.
+#install npm i bycriptjs
 #use bycript js for password hashing in Schema
 #thn Password hashing use in router.js for both in register and login
