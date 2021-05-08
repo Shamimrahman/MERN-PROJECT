@@ -33,3 +33,11 @@ Password hashing.
 JWT
 #atfirst schemay giye Jsonweb token function create korte hobe
 #Generate Auth token in both login and reg router
+
+Cookies
+#Store jwt in cookies
+#Create a folder Middleware
+#Create a file auth.js
+#Store cookie
+#use res.cookie in reg and login
+

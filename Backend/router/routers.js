@@ -1,5 +1,7 @@
 const express=require('express')
 const bcrypt=require('bcryptjs')
+const jwt=require('jsonwebtoken')
+
 
 // 1.construct router
 // 2. Define Router
@@ -25,6 +27,15 @@ router.post("/register", async(req,res)=>{
         //generate Jwt
         const token=await createUser.generateAuthToken();
         console.log(`The Registration token is ${token}`)
+         
+        //cookie start
+        res.cookie('jwt',token,  {
+            express:new Date(Date.now()+300000),
+            httpOnly:true
+        })
+        
+       
+       //cookie end
     }
 
     catch(e){
@@ -81,6 +92,11 @@ router.post("/login",async(req,res)=>{
         
          const ismatch=await bcrypt.compare(password,usermail.password)
          const token=await usermail.generateAuthToken();
+
+         res.cookie('jwt',token,  {
+            express:new Date(Date.now()+3000),
+            httpOnly:true
+        })
 
          console.log(`The login token part is ${token}`)
         if(ismatch){
