@@ -1,4 +1,5 @@
 const express=require('express')
+const bcrypt=require('bcryptjs')
 
 // 1.construct router
 // 2. Define Router
@@ -74,7 +75,7 @@ router.post('/login',async(req,res)=>{
          //so bcrypt kore nite jate db er password and login er pass word match hoy
          //match na hole login hobe na
         
-        
+         const ismatch=await bcrypt.compare(password,usermail.password)
         if(ismatch){
             res.status(201).render("/")
             

@@ -4,6 +4,8 @@ const app=express()
 const mongoose=require("mongoose")
 const path=require('path')
 const port=process.env.PORT || 3000
+const bcrypt=require('bcrypt')
+
 
 //for use in all file
 dotenv.config({path:'./config.env'})
