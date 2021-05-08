@@ -41,3 +41,8 @@ Cookies
 #Store cookie
 #use res.cookie in reg and login
 
+Get Cookies
+#get cookies using npm i cookieparser
+#get cookie in app.js 
+#ekn jei page auth need oi page app.js a rout korte hobe
+

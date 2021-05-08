@@ -23,27 +23,23 @@ const router=require('./router/routers')
 app.use(router)
 //get router end
 
+//cookie parser to get token which is stored in cookie
+var cookieParser = require('cookie-parser')
+const jwt=require('jsonwebtoken')
 
-
-
-
-
-//middleware
-const middleware=(req,res,next)=>{
-    console.log('Authorized')
-   
-    next()
-   }
-//router
-app.get('/',(req,res)=>{
-    res.send("Welcome to Mern Project")
+ app.use(cookieParser())
+ 
+ app.get('/validtoken', auth,(req,res)=>{
+  
+  //here auth is come fromm middle ware auth file to check user is authentic or not
+   console.log(`The valid token is ${req.cookies.jwt}`)
+  res.render('validtoken')
 })
 
 
 
-app.get('/about',middleware,(req,res)=>{
-    res.send("Welcome to Secret Page")
-})
+
+
 //connection
 app.listen(port,()=>{
     console.log(`Connected from ${port}`)
