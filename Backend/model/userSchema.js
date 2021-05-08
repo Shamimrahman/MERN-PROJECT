@@ -91,6 +91,27 @@ UserSchema.pre("save",async function(next){
 
 //password hash end
 
+//jsonweb token
+//jwt auth
+const jwt=require('jsonwebtoken')
+UserSchema.methods.generateAuthToken=async function(){
+    try{
+     console.log(this._id)
+     const token=await jwt.sign({_id:this._id.toString()},process.env.SECRET_KEY)
+     this.tokens=this.tokens.concat({token:token})
+     await this.save()
+     return token;
+
+    }
+
+    catch(e){
+        res.send('The error part is'+e)
+        console.log('The error part is'+e)
+    }
+
+}
+
+
 //create collection Start
 
 const User=new mongoose.model("USER",UserSchema)

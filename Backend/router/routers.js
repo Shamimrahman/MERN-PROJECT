@@ -21,6 +21,10 @@ router.post("/register", async(req,res)=>{
         const createUser= await user.save()
         res.status(201).send(createUser)
         res.send("Data Store Sucessfully")
+
+        //generate Jwt
+        const token=await createUser.generateAuthToken();
+        console.log(`The Registration token is ${token}`)
     }
 
     catch(e){
@@ -64,7 +68,7 @@ router.get('/getUser/:id', async (req,res)=>{
  //get imdividual student finish
  
 //Login start
-router.post('/login',async(req,res)=>{
+router.post("/login",async(req,res)=>{
     try{
         const email=req.body.email;
         const password=req.body.password
@@ -76,8 +80,11 @@ router.post('/login',async(req,res)=>{
          //match na hole login hobe na
         
          const ismatch=await bcrypt.compare(password,usermail.password)
+         const token=await usermail.generateAuthToken();
+
+         console.log(`The login token part is ${token}`)
         if(ismatch){
-            res.status(201).render("/")
+            res.status(201).send("YOu are log in")
             
         }
 
@@ -88,7 +95,7 @@ router.post('/login',async(req,res)=>{
     }
 
     catch(e){
-        res.status(400).send("Invalid mail")
+        res.status(400).send('Problem Occure')
     }
 })
 
