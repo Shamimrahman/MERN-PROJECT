@@ -18,8 +18,8 @@ function Home() {
         <Link to='/registration'><button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Register</button></Link>
       </div>
     </div>
-    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-      <img className="object-cover object-center rounded" alt="hero" src="https://www.kyleads.com/wp-content/uploads/2018/12/Customer-service.gif"/>
+    <div className="lg:max-w-lg lg:w-full overflow-y-hidden md:w-1/2 w-5/6 mt-3">
+      <img className="object-cover object-center rounded" alt="hero" src="https://www.qad.com/blog/wp-content/uploads/2015/11/animated_Handshake_loop2.gif"/>
     </div>
   </div>
 </section>
