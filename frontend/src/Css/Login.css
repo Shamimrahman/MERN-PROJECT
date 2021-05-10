@@ -1,0 +1,18 @@
+.fixed-contain{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+@media only screen and (max-width: 768px) {
+    .fixed-contain{
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%);
+        width: 100%;
+        margin-top:8%
+
+    }
+    
+    
+  }

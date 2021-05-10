@@ -13,6 +13,8 @@ import Home from './Components/Home'
 function App() {
   return (
     <div>
+    <Navbar></Navbar>
+
     <Switch>
     <Route path='/about' component={About} ></Route>
     <Route path='/contact' component={Contact} ></Route>
