@@ -18,7 +18,7 @@ function Home() {
       </div>
     </div>
     <div className="lg:max-w-lg lg:w-full overflow-y-hidden md:w-1/2 w-5/6 mt-3">
-      <img className="object-cover object-center rounded" alt="hero" src="https://www.qad.com/blog/wp-content/uploads/2015/11/animated_Handshake_loop2.gif"/>
+      <img className="object-cover object-center rounded" alt="hero" src="https://bloggingcoder.com/api/blog/photo/what-is-mern-stack"/>
     </div>
   </div>
 </section>
