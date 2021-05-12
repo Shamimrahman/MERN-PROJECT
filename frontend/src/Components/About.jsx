@@ -1,14 +1,14 @@
-import React from 'react'
-import Navbar from './Navbar'
+import React from "react";
+import Navbar from "./Navbar";
 
 function About() {
-    return (
-        <div>
-            <main className="profile-page -mt-9">
-        <section className="relative block" style={{ height: "500px" }}>
-         
-         
-        </section>
+  return (
+    <div>
+      <main className="profile-page -mt-9">
+        <section
+          className="relative block"
+          style={{ height: "500px" }}
+        ></section>
         <section className="relative">
           <div className="container mx-auto px-4 ">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-half mb-6 shadow-2xl rounded-lg -mt-80">
@@ -75,14 +75,13 @@ function About() {
                     University of Computer Science
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>
         </section>
       </main>
-        </div>
-    )
+    </div>
+  );
 }
 
-export default About
+export default About;

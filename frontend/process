@@ -3,3 +3,7 @@ React router dom
 login page 
 Registration page 
 About Page
+Contact Page
+
+******Data Store****
+#At first stroe registration data using usestate
