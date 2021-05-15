@@ -30,11 +30,7 @@ const UserSchema= new mongoose.Schema({
         required:true,
 
     },
-    message:{
-        type:String,
-        required:true,
-
-    },
+   
     email:{
         type:String,
         required:true,
@@ -75,6 +71,7 @@ const UserSchema= new mongoose.Schema({
 })
 
 //password hash
+
 const bcrypt=require('bcryptjs')
 UserSchema.pre("save",async function(next){
     if(this.isModified('password')){
@@ -118,3 +115,5 @@ const User=new mongoose.model("USER",UserSchema)
 module.exports=User
 //express part a lagbe
 //create collection end
+
+

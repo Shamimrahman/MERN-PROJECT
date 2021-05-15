@@ -1,29 +1,40 @@
-const express=require('express')
-const bcrypt=require('bcryptjs')
-const jwt=require('jsonwebtoken')
-
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // 1.construct router
 // 2. Define Router
 //3. Use Router in router.js
-const router=new express.Router()
+const router = new express.Router();
 
 //require schema
-const User =require('../model/userSchema')
+const User = require("../model/userSchema");
 
 //routing
-router.get("/",(req,res)=>{
-    res.send("Hello from USER Database")
-})
 
 //using async await
-router.post("/register", async(req,res)=>{
-    try{
-        const user=new User(req.body)
-        const createUser= await user.save()
-        res.status(201).send(createUser)
-        res.send("Data Store Sucessfully")
 
+/*
+router.post('/register',async(req,res)=>{
+    
+    try{
+        const pass=req.body.password;
+        const cpass=req.body.confirmpass;
+  
+
+         if(pass===cpass){
+ 
+         //data save to database
+           const userform=new User({
+            username:req.body.username,
+            email:req.body.email,
+            address:req.body.address,
+            mobile:req.body.mobile,
+            profession:req.body.profession,
+            password:req.body.password,
+            retypepass:req.body.confirmpepass
+        })
+       
         //generate Jwt
         const token=await createUser.generateAuthToken();
         console.log(`The Registration token is ${token}`)
@@ -33,87 +44,199 @@ router.post("/register", async(req,res)=>{
             express:new Date(Date.now()+300000),
             httpOnly:true
         })
+        //cookie end
         
+       //save config
+        const storeuser=await userform.save()
+        console.log(storeuser)
        
-       //cookie end
     }
 
-    catch(e){
-      res.status(400).send(e)
+    else{
+        window.alert("Password not Match")
+    }
+
+    }
+    catch (e){
+        res.status(404).send(e)
+
     }
 })
+*/
+
+//second way
+
+router.post("/register", async (req, res) => {
+  const {
+    username,
+    address,
+    email,
+    mobile,
+    profession,
+    password,
+    confirmpass,
+  } = req.body;
+
+  if (
+    !username ||
+    !address ||
+    !email ||
+    !mobile ||
+    !profession ||
+    !password ||
+    !confirmpass
+  ) {
+    return res.status(402).json({ error: "Please fill up the form" });
+  }
+  try {
+    const userExist = await User.findOne({ email: email });
+
+    if (userExist) {
+      return res.status(402).json({ error: "Email already exist" });
+    } else if (password != confirmpass) {
+      return res.status(402).json({ error: "Pass Not Match" });
+    } else {
+      const user = new User({
+        username,
+        address,
+        email,
+        mobile,
+        profession,
+        password,
+        confirmpass,
+      });
+
+      await user.save();
+      res.status(201).json({ message: "Successfully Stored" });
+
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 //add user end
 //get user
-router.get("/getuser",async(req,res)=>{
-    const Userdata=await User.find()
-    res.send(Userdata)
-})
-
+router.get("/getuser", async (req, res) => {
+  const Userdata = await User.find();
+  res.send(Userdata);
+});
 
 //get oneuser
 
-router.get('/getUser/:id', async (req,res)=>{
-      
-    try{
-     const _id=req.params.id
-     const userdata= await User.findById(_id)
- 
-     console.log(userdata)
- 
-     if(!userdata){
-         res.status(404)
-     }
-     else{
-         res.status(200).send(userdata)
-     }
+router.get("/getUser/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const userdata = await User.findById(_id);
+
+    console.log(userdata);
+
+    if (!userdata) {
+      res.status(404);
+    } else {
+      res.status(200).send(userdata);
     }
- 
-    catch(e){
-        res.status(400).send(e)
-    }
- 
- 
- })
- 
- //get imdividual student finish
- 
-//Login start
-router.post("/login",async(req,res)=>{
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+//get imdividual student finish
+
+router.post('/login',async(req,res)=>{
     try{
         const email=req.body.email;
         const password=req.body.password
 
         const usermail=await User.findOne({email:email})
-          //ekhn amra reg a jei password disi ta to hash hoye db a ase
+         //ekhn amra reg a jei password disi ta to hash hoye db a ase
          //so amra jokhon login korte jabo tokhon to password text akar a jabe
          //so bcrypt kore nite jate db er password and login er pass word match hoy
          //match na hole login hobe na
-        
-         const ismatch=await bcrypt.compare(password,usermail.password)
-         const token=await usermail.generateAuthToken();
+        const ismatch=await bcrypt.compare(password,usermail.password)
 
-         res.cookie('jwt',token,  {
+        //middle ware
+
+        const token=await usermail.generateAuthToken();
+        console.log(`The login token part is ${token}`)
+        res.cookie('jwt',token,  {
             express:new Date(Date.now()+3000),
             httpOnly:true
         })
+        //here jwt cookie name 
+        //aikhn 3000 mean kore ami ekta website a dhuklam 
+        //thn login howar por autmoaticly 10/20mins porbe abar login koren
+        //like nsu rds 
+        //so token cokkies theke expire kore dei
+       
+       //cookie end
+       //cookie token get 
+       //cookie get kora lagbe cz jwt token cookie te ase
+       //tar jonno npm i cookie-parser
+       //var cookieParser = require('cookie-parser')
 
-         console.log(`The login token part is ${token}`)
+       //cookie parser app.js a use korte hobe. and 
+       //extra ekta page khule ta get korte hobe
+     //var cookieParser = require('cookie-parser')
+      // app.use(cookieParser())
+
+
+
+
+
+        //middleware end
         if(ismatch){
-            res.status(201).send("YOu are log in")
+           res.json("Login Successfull")
             
         }
 
         else{
-            res.send("Please Use Proper Information")
+            res.send(400)
         }
 
     }
 
     catch(e){
-        res.status(400).send('Problem Occure')
+        res.status(400).send("Invalid mail")
     }
 })
 
-module.exports=router
 
+
+
+//Login start
+/*router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "fill up the crediantls" });
+    }
+
+    const userLogin = await User.findOne({ email: email });
+    //ekhn amra reg a jei password disi ta to hash hoye db a ase
+    //so amra jokhon login korte jabo tokhon to password text akar a jabe
+    //so bcrypt kore nite jate db er password and login er pass word match hoy
+    //match na hole login hobe na
+
+    //generate jwt for validation
+    const ismatch = await bcrypt.compare(password, userLogin.password);
+
+
+    if (userLogin&&ismatch) {
+      const token = await usermail.generateAuthToken();
+      res.cookie("jwt", token, {
+        express: new Date(Date.now() + 30000147875757),
+        httpOnly: true,
+      });
+
+      res.json("Login Successfully");
+    } else {
+      res.status(400).json({ error: "Invalid Credientials" });
+    }
+  } catch (e) {
+    res.status(404).send("Problem Occure");
+  }
+});
+*/
+module.exports = router;
