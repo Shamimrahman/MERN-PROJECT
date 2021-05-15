@@ -7,3 +7,18 @@ Contact Page
 
 ******Data Store****
 #At first stroe registration data using usestate
+
+# save button a onclick function nite hobe
+#funnction er vitor a ekhn kaj korte hobe
+#Data destructure korte hobe
+#Using "fetech" data send korte hobe backend er maddhome
+#post man er some condition dite hobe alng with JSON.stringify cz sever json bujhe na 
+#data thik moto send hoise naki tar jonno const data=await res.json
+#condition chalaite hobe j success hoise naki invalid
+
+#backend a update korlam cz age frontend theke data jawar jonno router applicable silo na 
+#app.js eo same kaj korlam
+
+#amader data send korte hole proxy server use korte hobe package.json a 
+#simply amader react app k boka banaite hobe j jate bujhe amra local host 3000 tei asi 
+#Data send hoye backend a jabe router thn data mongoose atlast a pathabe

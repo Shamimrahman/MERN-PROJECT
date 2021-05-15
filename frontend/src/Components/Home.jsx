@@ -3,6 +3,9 @@ import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 
 function Home() {
+
+  
+
   return (
     <div>
       <section className="text-gray-600 body-font -mt-5 sm:fixed sm:ml-14 ml-2">
