@@ -221,7 +221,14 @@ const auth=require('../Middleware/auth')
   })
   
 
- 
+ //get data for both home page and contact page
+  router.get('/getdata', auth,(req,res)=>{
+  
+    //here auth is come fromm middle ware auth file to check user is authentic or not
+     console.log(`The valid token is ${req.cookies.jwt}`)
+     res.send(req.rootUser)
+   
+  })
 
 
 //Login start
