@@ -2,6 +2,49 @@ import React from "react";
 import Navbar from "./Navbar";
 
 function Contact() {
+  
+   const [userData,setuserData]=useState("")
+  
+  const callContact= async ()=>{
+    try {
+      const res=await fetch('/about',{
+        method:"GET",
+        headers:{
+            
+            "Content-Type":'application/json'
+  
+        },
+      }) //ai porjonto korar por req backend a jabe backend check korbe valid naki
+      
+      //backend A Authentic howar por amader data send korbe 
+      //amra user er sob info peye gelam
+      const data=await res.json()
+      console.log(data)
+      if(!res.status===200){
+        const error = new Error(res.error);
+        throw error;
+      }
+      //
+      setuserData(data)
+  
+      //setUser userData te sob information send korbe
+  
+  
+  
+    } catch (error) {
+      console.log(error)
+      //authentic howar age by default login page show korbe 
+      
+      
+    }
+  
+  }
+  
+  
+    //we use useeefect to get the data from backend 
+     useEffect(() => {
+       callContact();
+     }, [])
   return (
     <div>
       <section>
