@@ -2,10 +2,16 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+
+
+
 // 1.construct router
 // 2. Define Router
 //3. Use Router in router.js
 const router = new express.Router();
+
+require('../db/connection')
+
 
 //require schema
 const User = require("../model/userSchema");
@@ -160,7 +166,7 @@ router.post('/login',async(req,res)=>{
         const token=await usermail.generateAuthToken();
         console.log(`The login token part is ${token}`)
         res.cookie('jwt',token,  {
-            express:new Date(Date.now()+3000),
+          expires:new Date(Date.now() + 25892000000),
             httpOnly:true
         })
         //here jwt cookie name 
@@ -202,6 +208,20 @@ router.post('/login',async(req,res)=>{
 })
 
 
+//to verify about us page
+
+
+const auth=require('../Middleware/auth')
+ router.get('/about', auth,(req,res)=>{
+  
+    //here auth is come fromm middle ware auth file to check user is authentic or not
+     console.log(`The valid token is ${req.cookies.jwt}`)
+     res.send(req.rootUser)
+   
+  })
+  
+
+ 
 
 
 //Login start

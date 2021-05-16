@@ -1,7 +1,11 @@
 const mongoose=require("mongoose")
 const validator = require('validator');
 
+//to avoid problem when we use validation
+const { Schema } = mongoose;
+mongoose.Promise = global.Promise;
 
+// validation problem end
 //schema start -> 
 //scehma holo field er val ki type hbe ta define korar nam ai
 
@@ -109,10 +113,10 @@ UserSchema.methods.generateAuthToken=async function(){
 }
 
 
-//create collection Start
+//create collection Start and export
 
-const User=new mongoose.model("USER",UserSchema)
-module.exports=User
+module.exports =
+    mongoose.models.USER || mongoose.model('USER', UserSchema);
 //express part a lagbe
 //create collection end
 
