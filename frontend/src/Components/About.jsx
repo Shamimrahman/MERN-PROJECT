@@ -1,6 +1,58 @@
 import React from "react";
 import Navbar from "./Navbar";
 
+
+
+
+
+import{useHistory} from 'react-router-dom'
+
+function About() {
+
+  const history=useHistory();
+  const [userData,setuserData]=useState('')
+
+const callAbout= async ()=>{
+  try {
+    const res=await fetch('/about',{
+      method:"GET",
+      headers:{
+          Accept:"application/json",
+          "Content-Type":'application/json'
+
+      },
+      credentials:"include"
+    }) //ai porjonto korar por req backend a jabe backend check korbe valid naki
+    
+    //backend A Authentic howar por amader data send korbe 
+    //amra user er sob info peye gelam
+    const data=await res.json()
+    console.log(data)
+    if(!res.status===200){
+      const error = new Error(res.error);
+      throw error;
+    }
+    //
+    setuserData(data)
+
+    //setUser userData te sob information send korbe
+
+
+
+  } catch (error) {
+    console.log(error)
+    //authentic howar age by default login page show korbe 
+    history.push('/login')
+    
+  }
+
+}
+
+
+  //we use useeefect to get the data from backend 
+   useEffect(() => {
+     callAbout();
+   }, [])
 function About() {
   return (
     <div>
